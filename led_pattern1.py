@@ -1,4 +1,3 @@
-print("hello world")
 import RPi.GPIO as GPIO
 import time
 
