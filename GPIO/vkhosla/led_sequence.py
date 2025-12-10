@@ -1,31 +1,17 @@
 import RPi.GPIO as GPIO
 import time
 
+LED_PINS = [17, 27, 22]
 
+GPIO.setmode(GPIO.BCM)
+for pin in LED_PINS:
+    GPIO.setup(pin, GPIO.OUT)
 
-GPIO.setmode ( GPIO.BOARD )  # use header pin numbers, not GPIO numbers
-
-ledPin1 = 36 
-ledPin2 = 37
-ledPin3 = 38
-
-
-
-GPIO.setup ( ledPin1, GPIO.OUT ) 
-GPIO.setup(ledPin2, GPIO.OUT)
-GPIO.setup(ledPin3, GPIO.OUT)
-
-
-while True:
-    GPIO.output ( ledPin1, GPIO.LOW  )  
-    time.sleep ( 3 )  # wait three seconds
-    GPIO.output ( ledPin1, GPIO.HIGH )  
-    time.sleep ( 3 )  # wait three seconds
-    GPIO.output ( ledPin2, GPIO.LOW  )  
-    time.sleep ( 3 )  # wait three seconds
-    GPIO.output ( ledPin2, GPIO.HIGH )  
-    time.sleep ( 3 )  # wait three seconds
-    GPIO.output ( ledPin3, GPIO.LOW  )  
-    time.sleep ( 3 )  # wait three seconds
-    GPIO.output ( ledPin3, GPIO.HIGH )  
-    time.sleep ( 3 )  # wait three seconds
+try:
+    while True:
+        for pin in LED_PINS:
+            GPIO.output(pin, GPIO.HIGH)
+            time.sleep(1)
+            GPIO.output(pin, GPIO.LOW)
+except KeyboardInterrupt:
+    GPIO.cleanup()
