@@ -1,0 +1,118 @@
+Misc Raspberry Pi Setup and Usage Notes (RPi 4, W.Witt, 2025)
+=============================================================
+
+
+Fix wrong (GB) keyboard mapping for additional users:
+-----------------------------------------------------
+~/.config/labwc/environment
+XKB_DEFAULT_MODEL=pc105
+XKB_DEFAULT_LAYOUT=us
+XKB_DEFAULT_VARIANT=
+XKB_DEFAULT_OPTIONS=
+
+
+Info re Multiple VNC Desktops
+-----------------------------
+https://forums.raspberrypi.com/viewtopic.php?t=353079
+https://raspberrypi.stackexchange.com/questions/100534/vnc-on-raspberry-pi-with-several-users-connecting-to-their-own-home-at-the-same
+
+
+Additional Software
+-------------------
+- From *Recommended Software* GUI
+  - MS Visual Studio
+  - Libre Office
+- GVIM: sudo apt install vim-gtk3
+- GIT Tools (via *Add/Remove Software* GUI)
+  - git-gui
+  - gitk
+  - gh (GitHub CLI)
+  - git-hub (Git command line interface to GitHub)
+
+
+Additional Group Memberships
+----------------------------
+- Command: sudo usermod -a -G <group> <user>
+- Groups:
+  - gpio
+  - i2c
+  - video
+
+
+Misc Tech Notes
+---------------
+- Raspberry Pi Processors, Other ICs
+  - https://www.raspberrypi.com/documentation/computers/processors.html
+  - https://datasheets.raspberrypi.com/bcm2711/bcm2711-peripherals.pdf
+- I2C Bus
+  - Understanding the I2C bus: https://www.ti.com/lit/an/slva704/slva704.pdf
+  - Query I2C bus: sudo i2cdetect -y 1
+  - I2C clock speed:
+    - RPi4 default: 100kHz (possible to divide by powers of 2; 400kHz max)
+    - https://raspberrypi.stackexchange.com/questions/108896/what-is-rpis-i2c-maximum-speed
+    - Modify:
+      - https://www.raspberrypi-spy.co.uk/2018/02/change-raspberry-pi-i2c-bus-speed/
+      - For example, to 12.5kHz...
+        - On the fly:
+          - sudo rmmod i2c_bcm2708                    # unload module
+          - sudo modprobe i2c_bcm2708 baudrate=12500  # reload with new setting
+        - For every boot:
+          - /boot/firmware/config.txt
+          - dtparam=i2c_arm=on,i2c_arm_baudrate=12500
+- GPIO
+  - GPIO Pull-Up/Pull-Down
+    - https://forums.raspberrypi.com/viewtopic.php?t=202568
+    - https://github.com/raspberrypilearning/physical-computing-guide/blob/master/pull_up_down.md
+
+
+Raspberry Pi Python Packages for Devices
+----------------------------------------
+sudo apt install -y python3-picamera2 (<- already part of default install)
+sudo pip3 install adafruit-circuitpython-lsm6ds --break-system-packages
+sudo pip3 install adafruit-circuitpython-lis3mdl --break-system-packages
+
+
+GIT Repo Creation (e.g. AstroRev-Practice)
+------------------------------------------
+git init
+git config --global user.email robotobyte@gmail.com
+git config --global user.name "Wolf Witt"
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/robotobyte/AstroRev-Practice.git
+gh auth login
+git push -u origin main
+
+
+GPIO Control
+------------
+- User needs to be member of gpio group: sudo usermod -a -G gpio <uid>
+- Python example: https://www.ics.com/blog/control-raspberry-pi-gpio-pins-python
+- API Docs
+  - https://pypi.org/project/rpi-lgpio/
+  - https://rpi-lgpio.readthedocs.io/en/latest/
+  - https://rpi-lgpio.readthedocs.io/en/latest/api.html
+
+
+Raspberry Pi Camera
+-------------------
+- I2C and 1-Wire (?) interfaces need to be enabled
+- User needs to be member of video group: sudo usermod -a -G video <uid>
+- Camera test: rpicam-hello
+- https://www.raspberrypi.com/documentation/accessories/camera.html
+- https://projects.raspberrypi.org/en/projects/getting-started-with-picamera/2
+- PiCamera:
+  - https://picamera.readthedocs.io/en/release-1.13/
+- PiCamera2
+  - https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf
+  - https://randomnerdtutorials.com/raspberry-pi-picamera2-python/
+
+
+Adafruit IMU for Raspberry PI
+-----------------------------
+- User needs to be member of I2C group: sudo usermod -a -G i2c <uid>
+- Query I2C bus for installed devices, known addresses: sudo i2cdetect -y 1
+- Docs:
+  - https://docs.circuitpython.org/projects/lsm6dsox/en/latest/
+  - https://docs.circuitpython.org/projects/lis3mdl/en/latest/
