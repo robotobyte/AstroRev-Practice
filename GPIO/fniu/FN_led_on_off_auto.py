@@ -26,28 +26,19 @@ import time
 
 GPIO.setmode ( GPIO.BOARD )  # use header pin numbers, not GPIO numbers
 
-ledPinRed = 15  # GPIO 22
-ledPinYellow = 16 #GPIO 23
-ledPinGreen = 18 #GPIO 24
+
+ledpins = (15, 16, 18) # gpio 22, 23, 24
 
 
 # *** Set Up Pin Behavior Modes *** 
 
-GPIO.setup ( ledPinRed, GPIO.OUT )  # set pin as output
-GPIO.setup ( ledPinYellow, GPIO.OUT )
-GPIO.setup ( ledPinGreen, GPIO.OUT )
-# *** Drive Pins ***
- GPIO.output ( ledPinRed, GPIO.LOW  )  # drive pin low  (off, 0V)
- GPIO.output ( ledPinYellow, GPIO.LOW  )  # drive pin low  (off, 0V)
- GPIO.output ( ledPinGreen, GPIO.LOW  )  # drive pin low  (off, 0V)
+for pin in ledpins:
+ GPIO.setup (pin, GPIO.OUT)
+ GPIO.output (pin, GPIO.LOW)
+
 
 while True:
-    GPIO.output ( ledPinRed, GPIO.HIGH  )  # drive pin low  (off, 3.3V)
-    time.sleep ( 1 )  # wait 1 seconds
-    GPIO.output ( ledPinRed, GPIO.LOW  )  # drive pin low  (off, 0V)
-    GPIO.output ( ledPinYellow, GPIO.HIGH )  # drive pin high (on, 3.3V)
-    time.sleep ( 1 )  # wait 1 seconds
-    GPIO.output ( ledPinYellow, GPIO.LOW )  # drive pin off 0V
-    GPIO.output ( ledPinGreen, GPIO.HIGH  )  # drive pin high 3.3V
-    time.sleep ( 1 )  # wait 1 seconds
-    GPIO.output ( ledPinGreen, GPIO.LOW  )  # drive pin off 0V
+ for pin in ledpins:
+  GPIO.outpt(pin, GPIO.HIGH)
+  time.sleep(1)
+  GPIO.outpt(pin, GPIO.LOW)
