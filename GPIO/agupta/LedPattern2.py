@@ -36,6 +36,17 @@ try:
         GPIO.output(LED3, 1)
         time.sleep(1)
 
+        GPIO.output(LED1, 1)
+        GPIO.output(LED2, 0)
+        GPIO.output(LED3, 1)
+        time.sleep(1)
+
+        GPIO.output(LED1, 0)
+        GPIO.output(LED2, 1)
+        GPIO.output(LED3, 1)
+        time.sleep(1)
+
+
         # Step 5 (all on)
         GPIO.output(LED1, 1)
         GPIO.output(LED2, 1)
@@ -51,5 +62,7 @@ try:
 except KeyboardInterrupt:
     GPIO.cleanup()
 
-
-
+#red LED is 1.8V, yellow LED 2.1, green LED is 2.2
+#red resistor: 300 ohms
+#yellow resistor: 240 ohms
+#green resistor: 220 ohms
