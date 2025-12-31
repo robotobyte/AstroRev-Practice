@@ -50,39 +50,50 @@ OBS_LED = True
 
 GPIO.setmode ( GPIO.BCM )  # can't use BOARD mode; BCM forced by other library (?)
 
+# GPIO for output LEDs...
+
+# Create enumerated type for LED instances...
 class LedInstance(Enum) :
   ROT_NOW      = 0
-  ROT_CUMU     = 1
+  ROT_CUMUL    = 1
   ACC_NOW      = 2
   VEL_CUMUL    = 3
   STATE_READY  = 4
   STATE_ACTION = 5
 
 # Assign observability LEDs to pins using GPIO pin numbers...
+led_pin = dict()
 led_pin [ LedInstance.ROT_NOW      ] =  6  # header pin 31
 led_pin [ LedInstance.ROT_CUMUL    ] = 13  # header pin 33
 led_pin [ LedInstance.ACC_NOW      ] = 19  # header pin 35
 led_pin [ LedInstance.VEL_CUMUL    ] = 26  # header pin 37
 led_pin [ LedInstance.STATE_READY  ] = 20  # header pin 38
-led_in  [ LedInstance.STATE_ACTION ] = 21  # header pin 40
+led_pin [ LedInstance.STATE_ACTION ] = 21  # header pin 40
 
 # Set up all LED pins as outputs...
-for led_index in LedInstance :
-  GPIO.setup ( led_pin[led_index.value], GPIO.OUT )
+for led_instance in LedInstance :
+  GPIO.setup ( led_pin[led_instance], GPIO.OUT )
 
+# Allocate data structure for whether LEDs should be lit...
+led_on = dict()
+
+# GPIO for input buttons...
+
+# Create enumerated type of button instances...
 class ButtonInstance(Enum) :
   RESET        = 0
   FORCE_CALIB  = 1
   FORCE_ACTION = 2
 
 # Assign input buttons to pins using GPIO pin numbers...
+button_pin = dict()
 button_pin [ ButtonInstance.RESET        ] = 18  # header pin 12
 button_pin [ ButtonInstance.FORCE_CALIB  ] = 23  # header pin 16
 button_pin [ ButtonInstance.FORCE_ACTION ] = 24  # header pin 18
 
 # Set up button pins as inputs with pull-up resistor...
-for button_index in ButtonInstance :
-  GPIO.setup ( button_pin[button.value], GPIO.IN, GPIO.PUD_UP )
+for button_instance in ButtonInstance :
+  GPIO.setup ( button_pin[button_instance], GPIO.IN, GPIO.PUD_UP )
 
 # Connect Devices
 # ---------------
@@ -431,16 +442,16 @@ try :
     # Observability via LEDs...
     if OBS_LED :
 
-      led_on [ ROT_NOW   ] = not rot_is_zero(np_gyr_filtered)
-      led_on [ ROT_CUMUL ] = not rot_is_zero(np_rot_cumul)
-      led_on [ ACC_NOW   ] = not acc_is_only_g(np_acc_filtered)
-      led_on [ VEL_CUMUL ] = not vel_is_zero(np_vel_cumul)
+      led_on [ LedInstance.ROT_NOW   ] = not rot_is_zero(np_gyr_filtered)
+      led_on [ LedInstance.ROT_CUMUL ] = not rot_is_zero(np_rot_cumul)
+      led_on [ LedInstance.ACC_NOW   ] = not acc_is_only_g(np_acc_filtered)
+      led_on [ LedInstance.VEL_CUMUL ] = not vel_is_zero(np_vel_cumul)
 
-      led_on [ STATE_READY  ] = control_state_current == ControlState.READY
-      led_on [ STATE_ACTION ] = control_state_current == ControlState.ACTION or control_state_current == ControlState.PAUSE
+      led_on [ LedInstance.STATE_READY  ] = control_state_current == ControlState.READY
+      led_on [ LedInstance.STATE_ACTION ] = control_state_current == ControlState.ACTION or control_state_current == ControlState.PAUSE
 
-      for led_index in LedInstance :
-        GPIO.output ( led_pin[led_index.value], GPIO.HIGH if led_on[led_index.value] else GPIO.LOW )
+      for led_instance in LedInstance :
+        GPIO.output ( led_pin[led_instance], GPIO.HIGH if led_on[led_instance] else GPIO.LOW )
 
     # --- Prepare For Next Loop Iteration ---
 
@@ -455,8 +466,8 @@ except KeyboardInterrupt:
   pass  # just continue on with finally block
 
 finally:
-  for led in LedInstance :
-    GPIO.output ( led_pin[led.value], GPIO.LOW )
+  for led_instance in LedInstance :
+    GPIO.output ( led_pin[led_instance], GPIO.LOW )
   print ( "" )
   print ( "Final Info" )
   print ( "----------" )
