@@ -37,9 +37,9 @@ GPIO.setup ( ledPinRed, GPIO.OUT )  # set pin as output
 GPIO.setup ( ledPinYellow, GPIO.OUT )
 GPIO.setup ( ledPinGreen, GPIO.OUT )
 # *** Drive Pins ***
- GPIO.output ( ledPinRed, GPIO.LOW  )  # drive pin low  (off, 0V)
- GPIO.output ( ledPinYellow, GPIO.LOW  )  # drive pin low  (off, 0V)
- GPIO.output ( ledPinGreen, GPIO.LOW  )  # drive pin low  (off, 0V)
+GPIO.output ( ledPinRed, GPIO.LOW  )  # drive pin low  (off, 0V)
+GPIO.output ( ledPinYellow, GPIO.LOW  )  # drive pin low  (off, 0V)
+GPIO.output ( ledPinGreen, GPIO.LOW  )  # drive pin low  (off, 0V)
 
 while True:
     # green 1 second
