@@ -2,6 +2,15 @@ Misc Raspberry Pi Setup and Usage Notes (RPi 4, W.Witt, 2025)
 =============================================================
 
 
+Windows: Find/list devices on network:
+--------------------------------------
+- From https://superuser.com/questions/522296/windows-command-to-display-all-ip-addresses-in-a-local-network
+  > for ($i = 1; $i -lt 255; $i++) {
+  >  Test-Connection "192.168.xxx.$i" -Count 1 -ErrorAction SilentlyContinue
+  > }
+Then test echo $LastExitCode and use nslookup <ip address> to get name???
+
+
 Fix wrong (GB) keyboard mapping for additional users:
 -----------------------------------------------------
 ~/.config/labwc/environment
@@ -40,8 +49,8 @@ Additional Group Memberships
   - video
 
 
-Misc Tech Notes
----------------
+Misc RPi Tech Notes
+-------------------
 - Raspberry Pi Processors, Other ICs
   - https://www.raspberrypi.com/documentation/computers/processors.html
   - https://datasheets.raspberrypi.com/bcm2711/bcm2711-peripherals.pdf
@@ -68,13 +77,14 @@ Misc Tech Notes
 
 Raspberry Pi Python Packages for Devices
 ----------------------------------------
-sudo apt install -y python3-picamera2 (<- already part of default install)
-sudo pip3 install adafruit-circuitpython-lsm6ds --break-system-packages
-sudo pip3 install adafruit-circuitpython-lis3mdl --break-system-packages
+- sudo apt install -y python3-picamera2 (<- already part of default install)
+- sudo pip3 install adafruit-circuitpython-lsm6ds --break-system-packages
+- sudo pip3 install adafruit-circuitpython-lis3mdl --break-system-packages
+* NOTE: See https://docs.python.org/3/tutorial/venv.html -- Don't run pip3 as root?!?
 
 
-GIT Repo Creation (e.g. AstroRev-Practice)
-------------------------------------------
+GIT Repo Creation (e.g. AstroRev-Practice by robotobyte/wcwitt)
+---------------------------------------------------------------
 git init
 git config --global user.email robotobyte@gmail.com
 git config --global user.name "Wolf Witt"
@@ -114,6 +124,6 @@ Adafruit IMU for Raspberry PI
 -----------------------------
 - User needs to be member of I2C group: sudo usermod -a -G i2c <uid>
 - Query I2C bus for installed devices, known addresses: sudo i2cdetect -y 1
-- Docs:
-  - https://docs.circuitpython.org/projects/lsm6dsox/en/latest/
-  - https://docs.circuitpython.org/projects/lis3mdl/en/latest/
+- Docs (e.g. API):
+  - Acc/Gyr: https://docs.circuitpython.org/projects/lsm6dsox/en/latest/
+  - Mag    : https://docs.circuitpython.org/projects/lis3mdl/en/latest/
