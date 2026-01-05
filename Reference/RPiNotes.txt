@@ -73,6 +73,14 @@ Misc RPi Tech Notes
   - GPIO Pull-Up/Pull-Down
     - https://forums.raspberrypi.com/viewtopic.php?t=202568
     - https://github.com/raspberrypilearning/physical-computing-guide/blob/master/pull_up_down.md
+- Sensor Calibration
+  - Accelerometer
+    - https://forum.arduino.cc/t/how-to-calibrate-an-accelerometer/961066/8
+    - https://thecavepearlproject.org/2015/05/22/calibrating-any-compass-or-accelerometer-for-arduino/
+  - Gyrscope
+    - https://learn.adafruit.com/adafruit-sensorlab-gyroscope-calibration/gyroscope-calibration
+  - Magnetometer
+    - https://learn.adafruit.com/adafruit-sensorlab-magnetometer-calibration/magnetometer-calibration
 
 
 Raspberry Pi Python Packages for Devices
