@@ -22,9 +22,10 @@ from git import Repo
 from picamera2 import Picamera2
 
 #VARIABLES
-THRESHOLD = 0      #Any desired value from the accelerometer
+THRESHOLD = 0.5      #Any desired value from the accelerometer
 REPO_PATH = "home/astrorev/Documents/AstroRev-Practice"     #Your github repo path: ex. /home/pi/FlatSatChallenge
 FOLDER_PATH = "flatsat/agupta"   #Your image folder path in your GitHub repo: ex. /Images
+EARTHG = 9.81
 
 #imu and camera initialization
 i2c = board.I2C()
@@ -86,7 +87,7 @@ def take_photo():
         ax, ay, az = accel_gyro.acceleration
 
         # total acceleration magnitude
-        motion = (ax**2 + ay**2 + az**2) ** 0.5 > THRESHOLD
+        motion = ((ax**2 + ay**2 + az**2) ** 0.5)- EARTHG > THRESHOLD
 
         # ----------------- STILL -----------------
         if state == STILL:
@@ -100,7 +101,7 @@ def take_photo():
 
         # ------------ INITIALIZE TIMER ----------
         elif state == INIT_TIMER:
-            stop_start_time = time.time()
+            stop_start_time = time.monotonic()
             state = STOPPED
 
         # ---------------- STOPPED ----------------
@@ -108,7 +109,7 @@ def take_photo():
             if motion:
                 state = MOVING
             else:
-                if time.time() - stop_start_time >= STABLE_TIME:
+                if time.monotonic() - stop_start_time >= STABLE_TIME:
                     state = TAKE_PIC
 
         # --------------- TAKE PICTURE ------------
@@ -136,8 +137,6 @@ def take_photo():
             # do nothing to file, simply wait for stillness
             if not motion:
                 state = STILL
-
-        time.sleep(0.05)
   
 
         #CHECKS IF READINGS ARE ABOVE THRESHOLD
