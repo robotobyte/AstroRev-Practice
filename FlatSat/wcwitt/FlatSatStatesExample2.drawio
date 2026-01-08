@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
   <diagram name="Page-1" id="AedUlh9VzS35AVB0a3VL">
-    <mxGraphModel dx="1216" dy="1202" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="575" dy="829" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -139,7 +139,7 @@
             <mxPoint x="2" y="66" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="YNFenmRTjmK-CKCKF0wH-31" value="POISON PICTURE&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;(discard picture)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+        <mxCell id="YNFenmRTjmK-CKCKF0wH-31" value="POISON PICTURE&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;(discard picture or save it but tag it as potentiall blurry?)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="1119.97" y="740" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="YNFenmRTjmK-CKCKF0wH-32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" edge="1">
@@ -153,19 +153,19 @@
             <mxPoint x="1" y="-8" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="YNFenmRTjmK-CKCKF0wH-34" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;curved=0;" parent="1" source="YNFenmRTjmK-CKCKF0wH-31" target="YNFenmRTjmK-CKCKF0wH-1" edge="1">
+        <mxCell id="YNFenmRTjmK-CKCKF0wH-34" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;curved=0;" parent="1" source="YNFenmRTjmK-CKCKF0wH-31" target="YNFenmRTjmK-CKCKF0wH-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1189.68" y="670" as="sourcePoint" />
             <mxPoint x="1189.68" y="750" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1519.97" y="770" />
-              <mxPoint x="1519.97" y="210" />
+              <mxPoint x="1520" y="770" />
+              <mxPoint x="1520" y="225" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="YNFenmRTjmK-CKCKF0wH-35" value="Motion Detected" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#CC6600,#EDEDED);" parent="YNFenmRTjmK-CKCKF0wH-34" vertex="1" connectable="0">
           <mxGeometry x="0.2139" y="-1" relative="1" as="geometry">
-            <mxPoint x="-1" y="330" as="offset" />
+            <mxPoint x="-1" y="341" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="YNFenmRTjmK-CKCKF0wH-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;curved=0;" parent="1" source="YNFenmRTjmK-CKCKF0wH-31" edge="1">
@@ -181,6 +181,21 @@
         <mxCell id="YNFenmRTjmK-CKCKF0wH-37" value="! Motion Detected" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#CC6600,#EDEDED);" parent="YNFenmRTjmK-CKCKF0wH-36" vertex="1" connectable="0">
           <mxGeometry x="0.2139" y="-1" relative="1" as="geometry">
             <mxPoint x="-1" y="421" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w81YLruWa7WMcqYVLu2F-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;curved=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1279.97" y="210" />
+              <mxPoint x="1279.97" y="190" />
+            </Array>
+            <mxPoint x="1240" y="210" as="sourcePoint" />
+            <mxPoint x="1239.97" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w81YLruWa7WMcqYVLu2F-2" value="&lt;div align=&quot;left&quot;&gt;Motion Detected&lt;/div&gt;" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#CC6600,#EDEDED);" parent="w81YLruWa7WMcqYVLu2F-1" connectable="0" vertex="1">
+          <mxGeometry x="-0.0338" y="2" relative="1" as="geometry">
+            <mxPoint x="2" y="-2" as="offset" />
           </mxGeometry>
         </mxCell>
       </root>
