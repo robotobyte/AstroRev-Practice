@@ -18,13 +18,14 @@ import time
 import board
 from adafruit_lsm6ds.lsm6dsox import LSM6DSOX as LSM6DS
 from adafruit_lis3mdl import LIS3MDL
-from git import Repo
+#from git import Repo
 from picamera2 import Picamera2
+import math
 
 #VARIABLES
 THRESHOLD = 0.5      #Any desired value from the accelerometer
-REPO_PATH = "home/astrorev/Documents/AstroRev-Practice"     #Your github repo path: ex. /home/pi/FlatSatChallenge
-FOLDER_PATH = "flatsat/agupta"   #Your image folder path in your GitHub repo: ex. /Images
+REPO_PATH = "/home/astrorev/Documents/AstroRev-Practice"     #Your github repo path: ex. /home/pi/FlatSatChallenge
+FOLDER_PATH = "FlatSat/agupta"   #Your image folder path in your GitHub repo: ex. /Images
 EARTHG = 9.81
 
 #imu and camera initialization
@@ -91,6 +92,7 @@ def take_photo():
 
         # ----------------- STILL -----------------
         if state == STILL:
+            
             if motion:
                 state = MOVING
 
@@ -119,7 +121,8 @@ def take_photo():
             print("Saved:", filename)
 
             try:
-                git_push()
+                pass
+                #git_push()
             except:
                 pass
 
@@ -137,7 +140,7 @@ def take_photo():
             # do nothing to file, simply wait for stillness
             if not motion:
                 state = STILL
-  
+        print(state)
 
         #CHECKS IF READINGS ARE ABOVE THRESHOLD
             #PAUSE
@@ -154,3 +157,9 @@ def main():
 
 if __name__ == '__main__':
     main()
+#0 is still
+#1 is moving
+#2 is starting timer
+#3 is stopped again
+#4 is taking photo
+#5 is poison
